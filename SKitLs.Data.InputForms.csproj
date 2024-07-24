@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+    <PackageTags>User Input; Data;</PackageTags>
+    <Version>$(AssemblyVersion)-rc.0</Version>
+    <Title>SKitLs.Data.InputForms</Title>
+    <Authors>SKitLs, Sargeras02</Authors>
+    <Description>SKitLs.Data.InputForms is a .NET/C# library that offers a unified approach to user input handling by enabling developers to create data forms with specified constraints.
+
+The library supports converting these forms into various user interfaces through extensions.</Description>
+    <Copyright>Copyright (C) 2024, SKitLs</Copyright>
+    <PackageProjectUrl>https://github.com/SKitLs-dev/SKitLs.Data.InputForms</PackageProjectUrl>
+    <PackageIcon>libIcon_iforms.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <RepositoryUrl>https://github.com/SKitLs-dev/SKitLs.Data.InputForms</RepositoryUrl>
+    <SignAssembly>False</SignAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\libIcon_iforms.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SKitLs.Utils.Extensions" Version="0.1.1" />
+    <PackageReference Include="SKitLs.Utils.Localizations" Version="3.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
