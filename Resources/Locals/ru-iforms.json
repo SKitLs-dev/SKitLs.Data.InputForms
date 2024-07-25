@@ -1,0 +1,13 @@
+{
+  "iforms.FieldIsNecessary": "Поле обязательно для ввода",
+  "iforms.ShouldTypeText": "Необходимо ввести текст",
+  "iforms.ShouldTypeNumber": "Необходимо ввести число",
+  "iforms.NumberBetweenErrorKey": "Введите число от {0} до {1}",
+  "iforms.NumberGreaterThanErrorKey": "Число должно быть больше {0}",
+  "iforms.NumberLessThanErrorKey": "Число должно быть меньше {1}",
+  "iforms.ShouldSelectOptionErrorKey": "Необходимо выбрать опцию",
+  "iforms.ShouldBeTrueFalseErrorKey": "Значение должно быть Да/Нет",
+  "iforms.PathNotFoundErrorKey": "Путь не найден",
+
+  "iforms.DefaultSelectOption": "-----"
+}

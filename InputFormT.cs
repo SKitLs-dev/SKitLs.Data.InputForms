@@ -9,10 +9,21 @@ using System.Reflection;
 namespace SKitLs.Data.InputForms
 {
     /// <summary>
+    /// The base <see cref="InputForm{T}"/> abstract class containing static members.
+    /// </summary>
+    public abstract class InputForm
+    {
+        /// <summary>
+        /// Gets or sets the default localizator for resolving localized strings.
+        /// </summary>
+        public static ILocalizator? DefaultLocalizator { get; set; }
+    }
+
+    /// <summary>
     /// Represents a form for user input, containing the data and the input parts.
     /// </summary>
     /// <typeparam name="T">The type of the data that this form handles.</typeparam>
-    public class InputForm<T> where T : notnull
+    public class InputForm<T> : InputForm where T : notnull
     {
         /// <summary>
         /// Event that triggers when the validation status of the form is updated.
@@ -26,19 +37,14 @@ namespace SKitLs.Data.InputForms
         protected void OnValidationUpdated(bool validation) => ValidationUpdated?.Invoke(validation);
 
         /// <summary>
-        /// Gets or sets the <see cref="FieldMapper"/> used to map metadata attributes to input field builders.
-        /// </summary>
-        public FieldMapper Mapper { get; set; }
-
-        /// <summary>
-        /// Gets or sets the default localizator for resolving localized strings.
-        /// </summary>
-        public static ILocalizator? DefaultLocalizator { get; set; }
-
-        /// <summary>
         /// Gets or sets the localizator used to resolve localized strings for this form.
         /// </summary>
         public ILocalizator? Localizator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="FieldMapper"/> used to map metadata attributes to input field builders.
+        /// </summary>
+        public FieldMapper Mapper { get; set; }
 
         /// <summary>
         /// Gets the list of input parts that make up the form.

@@ -29,6 +29,24 @@ The library supports converting these forms into various user interfaces through
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Locals\en-iforms.json" />
+    <None Remove="Resources\Locals\ru-iforms.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Locals\en-iforms.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <Pack>true</Pack>
+      <PackagePath>Resources\Locals\</PackagePath>
+    </Content>
+    <Content Include="Resources\Locals\ru-iforms.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <Pack>true</Pack>
+	  <PackagePath>Resources\Locals\</PackagePath>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\libIcon_iforms.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>

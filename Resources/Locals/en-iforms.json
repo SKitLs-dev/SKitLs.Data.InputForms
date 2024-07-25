@@ -1,0 +1,13 @@
+{
+  "iforms.FieldIsNecessary": "Field is necessary",
+  "iforms.ShouldTypeText": "Text should be typed",
+  "iforms.ShouldTypeNumber": "Number should be typed",
+  "iforms.NumberBetweenErrorKey": "Number must be between {0} and {1}",
+  "iforms.NumberGreaterThanErrorKey": "Number must be greater than {0}",
+  "iforms.NumberLessThanErrorKey": "Number must be less than {0}",
+  "iforms.ShouldSelectOptionErrorKey": "Option should be selected",
+  "iforms.ShouldBeTrueFalseErrorKey": "Value should be true or false",
+  "iforms.PathNotFoundErrorKey": "Path not found",
+
+  "iforms.DefaultSelectOption": "-----"
+}
