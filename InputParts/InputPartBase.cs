@@ -27,9 +27,20 @@ namespace SKitLs.Data.InputForms.InputParts
         public event Action<object?>? OnSuccessValidation;
 
         /// <summary>
-        /// Gets or sets the localizator used to resolve localized strings for this input part.
+        /// Gets or sets the input field parent form.
         /// </summary>
-        public ILocalizator? Localizator { get; set; }
+        public InputForm? Parent { get; set; }
+
+        /// <summary>
+        /// Gets the localizator used to resolve localized strings for this input part.
+        /// </summary>
+        private ILocalizator? Localizator => Parent?.Localizator;
+
+        // TODO
+        /// <summary>
+        /// Gets the language code used to resolve localized strings for this input part.
+        /// </summary>
+        private LanguageCode Language => Parent?.Language ?? throw new NullReferenceException(nameof(Language));
 
         /// <summary>
         /// Gets or sets the <see cref="PropertyInfo"/> associated with the input part.
@@ -93,15 +104,16 @@ namespace SKitLs.Data.InputForms.InputParts
         /// <summary>
         /// Generates a preview of the input in the specified language.
         /// </summary>
-        /// <param name="language">The language code for localization.</param>
         /// <param name="input">The input to be previewed.</param>
+        /// <param name="language">The language code for localization. The form's <see cref="InputForm{T}.Language"/> is used if not specified.</param>
         /// <returns>The localized error preview string, or <see langword="null"/> if the input is valid.</returns>
         /// <exception cref="NullReferenceException">Thrown when the <see cref="Localizator"/> is null.</exception>
-        public virtual string? Preview(LanguageCode language, object? input)
+        public virtual string? Preview(object? input, LanguageCode? language = default)
         {
             var error = Preview(input);
-            if (error.HasValue)
-                return Localizator?.ResolveString(language, error.Value, true) ?? throw new NullReferenceException(nameof(Localizator));
+            language ??= Language;
+            if (error.HasValue) // TODO
+                return (Localizator ?? throw new NullReferenceException(nameof(Localizator))).ResolveString(language, error.Value, true) ?? throw new Exception($"Local key not found {error.Value}.");
             return null;
         }
 

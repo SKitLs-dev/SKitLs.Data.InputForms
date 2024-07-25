@@ -8,16 +8,26 @@ namespace SKitLs.Data.InputForms.Notations
     /// <remarks>
     /// This attribute is used to define a field that accepts a boolean input, typically represented as a flag (yes/no or true/false).
     /// </remarks>
-    /// <remarks>
-    /// Initializes a new instance of the <see cref="BoolDataAttribute"/> class.
-    /// </remarks>
-    /// <param name="caption">The caption or label for the input field.</param>
-    /// <param name="description">A brief description of the input field.</param>
-    /// <param name="isNecessary">Indicates whether the input field is necessary. Defaults to true.</param>
-    /// <param name="previewMethodName">Optional. The name of the method used to generate a preview of the input value.</param>
     [AttributeUsage(AttributeTargets.Property)]
-    public class BoolDataAttribute(string caption, string description, bool isNecessary = true, string? previewMethodName = null) : InputDataBaseAttribute(caption, description, isNecessary, previewMethodName)
+    public class BoolDataAttribute : InputDataBaseAttribute
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BoolDataAttribute"/> class.
+        /// </summary>
+        /// <param name="caption">The caption or label for the input field.</param>
+        /// <param name="description">A brief description of the input field.</param>
+        /// <param name="isNecessary">Indicates whether the input field is necessary. Defaults to true.</param>
+        /// <param name="previewMethodName">Optional. The name of the method used to generate a preview of the input value.</param>
+        public BoolDataAttribute(string caption, string description, bool isNecessary = true, string? previewMethodName = null) : base(caption, description, isNecessary, previewMethodName)
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BoolDataAttribute"/> class with the specified properties.
+        /// </summary>
+        /// <param name="isNecessary">Indicates whether the input field is necessary. Defaults to true.</param>
+        /// <param name="previewMethodName">Optional. The name of the method used to generate a preview of the input value. Can be null.</param>
+        public BoolDataAttribute(bool isNecessary = true, string? previewMethodName = null) : base(isNecessary, previewMethodName) { }
+
         /// <inheritdoc/>
         public override LocalSet? DefaultPreview(object? input)
         {

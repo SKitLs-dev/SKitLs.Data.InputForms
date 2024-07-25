@@ -2,6 +2,7 @@
 using SKitLs.Data.InputForms.Notations;
 using SKitLs.Data.InputForms.Notations.Refs;
 using SKitLs.Utils.Extensions.Lists;
+using SKitLs.Utils.Localizations.Languages;
 using SKitLs.Utils.Localizations.Localizators;
 using SKitLs.Utils.Localizations.Model;
 using System.Reflection;
@@ -9,7 +10,7 @@ using System.Reflection;
 namespace SKitLs.Data.InputForms
 {
     /// <summary>
-    /// The base <see cref="InputForm{T}"/> abstract class containing static members.
+    /// The base <see cref="InputForm{T}"/> abstract class containing static members and common properties.
     /// </summary>
     public abstract class InputForm
     {
@@ -17,6 +18,21 @@ namespace SKitLs.Data.InputForms
         /// Gets or sets the default localizator for resolving localized strings.
         /// </summary>
         public static ILocalizator? DefaultLocalizator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the language code used to resolve localized strings for this form.
+        /// </summary>
+        public static LanguageCode DefaultLanguage { get; set; } = LanguageCode.EN;
+
+        /// <summary>
+        /// Gets or sets the localizator used to resolve localized strings for this form.
+        /// </summary>
+        public ILocalizator? Localizator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the language code used to resolve localized strings for this form.
+        /// </summary>
+        public LanguageCode Language { get; set; }
     }
 
     /// <summary>
@@ -35,11 +51,6 @@ namespace SKitLs.Data.InputForms
         /// </summary>
         /// <param name="validation">The validation status to be triggered.</param>
         protected void OnValidationUpdated(bool validation) => ValidationUpdated?.Invoke(validation);
-
-        /// <summary>
-        /// Gets or sets the localizator used to resolve localized strings for this form.
-        /// </summary>
-        public ILocalizator? Localizator { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="FieldMapper"/> used to map metadata attributes to input field builders.
@@ -70,11 +81,13 @@ namespace SKitLs.Data.InputForms
         /// Initializes a new instance of the <see cref="InputForm{T}"/> class.
         /// </summary>
         /// <param name="formData">The form data to initialize the form with.</param>
+        /// <param name="language">The language used to localize form's fields.</param>
         /// <param name="mapper">The <see cref="FieldMapper"/> class to manage the mapping of metadata attributes to their corresponding input field builders.</param>
         /// <param name="localizator">The <see cref="ILocalizator"/> class to resolve localized strings.</param>
         /// <exception cref="ArgumentNullException">Thrown when the form data is null.</exception>
-        public InputForm(T formData, FieldMapper? mapper = null, ILocalizator? localizator = null)
+        public InputForm(T formData, FieldMapper? mapper = null, ILocalizator? localizator = null, LanguageCode? language = null)
         {
+            Language = language ?? DefaultLanguage;
             Mapper = mapper ?? FieldMapper.GlobalMapper ?? throw new ArgumentNullException(nameof(mapper));
             Localizator = localizator ?? DefaultLocalizator;
 
@@ -97,6 +110,7 @@ namespace SKitLs.Data.InputForms
             foreach (var property in fields)
             {
                 var meta = property.GetCustomAttribute<InputDataBaseAttribute>(true)!;
+                meta.Localize(property, this);
                 var value = property.GetValue(FormData);
 
                 var inputFieldData = mapper.ResolveInputField(property, meta, FormData);
@@ -105,7 +119,7 @@ namespace SKitLs.Data.InputForms
                 inputFieldData.InputPreview = ResolveInputPreview(meta);
                 inputFieldData.ValidationUpdated += OnValidationUpdated;
                 inputFieldData.InputValueBuilder = meta.ValueBuilder;
-                inputFieldData.Localizator = Localizator;
+                inputFieldData.Parent = this;
                 InputParts.Add(inputFieldData);
             }
 
@@ -116,6 +130,7 @@ namespace SKitLs.Data.InputForms
                 if (masterReferenceAttribute is null)
                     continue;
 
+                // TODO
                 if (masterReferenceAttribute.Dependents.Contains(property.Name))
                     throw new ArgumentException("No Self dependence is allowed.");
 

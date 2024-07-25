@@ -7,9 +7,22 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
-    <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+    <PackageReleaseNotes>(+) Added: ctor for attributes with no caption or description
+
+InputForm:
+(+) Added: static DefaultLanguage property
+(~) Moved: Localizator property (from InputForm&lt;T&gt;)
+(~) Added: Language property
+
+InputPartBase
+(+) Added: Parent property
+(~) Updated: Localizator now retrived from parent
+(+) Added: Language, retrived from parent
+(~) Updated: Preview() signature
+
+(+) Added: localization files now packed</PackageReleaseNotes>
     <PackageTags>User Input; Data;</PackageTags>
-    <Version>$(AssemblyVersion)-rc.0</Version>
+    <Version>$(AssemblyVersion)-rc.2</Version>
     <Title>SKitLs.Data.InputForms</Title>
     <Authors>SKitLs, Sargeras02</Authors>
     <Description>SKitLs.Data.InputForms is a .NET/C# library that offers a unified approach to user input handling by enabling developers to create data forms with specified constraints.
@@ -37,12 +50,12 @@ The library supports converting these forms into various user interfaces through
     <Content Include="Resources\Locals\en-iforms.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
-      <PackagePath>Resources\Locals\</PackagePath>
+      <PackagePath>contentFiles\any\any\Resources\Locals\</PackagePath>
     </Content>
     <Content Include="Resources\Locals\ru-iforms.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
-	  <PackagePath>Resources\Locals\</PackagePath>
+	  <PackagePath>contentFiles\any\any\Resources\Locals\</PackagePath>
     </Content>
   </ItemGroup>
 
