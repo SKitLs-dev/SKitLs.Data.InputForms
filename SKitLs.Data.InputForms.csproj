@@ -7,22 +7,13 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
-    <PackageReleaseNotes>(+) Added: ctor for attributes with no caption or description
+    <PackageReleaseNotes>(~) Fixed: Master-Slave dependent subscription call
 
-InputForm:
-(+) Added: static DefaultLanguage property
-(~) Moved: Localizator property (from InputForm&lt;T&gt;)
-(~) Added: Language property
-
-InputPartBase
-(+) Added: Parent property
-(~) Updated: Localizator now retrived from parent
-(+) Added: Language, retrived from parent
-(~) Updated: Preview() signature
-
-(+) Added: localization files now packed</PackageReleaseNotes>
+InputPartBase:
+(+) Added: InputDataBaseAttribute Meta proprty
+(~) Fixed: OnValueUpdated raising on value updated</PackageReleaseNotes>
     <PackageTags>User Input; Data;</PackageTags>
-    <Version>$(AssemblyVersion)-rc.2</Version>
+    <Version>$(AssemblyVersion)</Version>
     <Title>SKitLs.Data.InputForms</Title>
     <Authors>SKitLs, Sargeras02</Authors>
     <Description>SKitLs.Data.InputForms is a .NET/C# library that offers a unified approach to user input handling by enabling developers to create data forms with specified constraints.

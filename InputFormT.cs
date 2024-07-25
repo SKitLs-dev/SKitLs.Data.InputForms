@@ -161,9 +161,9 @@ namespace SKitLs.Data.InputForms
                         throw new Exception("Unresolved type of the callback.");
 
                     if (masterReferenceAttribute.IgnoreFailedPreview)
-                        slaveField.OnSuccessValidation += CallbackWrapper;
+                        masterField.OnSuccessValidation += CallbackWrapper;
                     else
-                        slaveField.OnValueUpdated += CallbackWrapper;
+                        masterField.OnValueUpdated += CallbackWrapper;
 
                     void CallbackWrapper(object? value)
                     {

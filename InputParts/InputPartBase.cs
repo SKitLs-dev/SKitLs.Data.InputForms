@@ -53,14 +53,19 @@ namespace SKitLs.Data.InputForms.InputParts
         public bool Locked { get; set; }
 
         /// <summary>
-        /// Gets or sets the caption of the input part.
+        /// The <see cref="InputDataBaseAttribute"/> meta attribute.
         /// </summary>
-        public string InputCaption { get; set; }
+        public InputDataBaseAttribute Meta { get; set; }
 
         /// <summary>
-        /// Gets or sets the description of the input part.
+        /// Gets the caption of the input part from the <see cref="Meta"/>.
         /// </summary>
-        public string? InputDescription { get; set; }
+        public string InputCaption => Meta.Caption;
+
+        /// <summary>
+        /// Gets the description of the input part from the <see cref="Meta"/>..
+        /// </summary>
+        public string? InputDescription => Meta.Description;
 
         private object? _inputValue;
 
@@ -76,6 +81,7 @@ namespace SKitLs.Data.InputForms.InputParts
                 if (_inputValue != value)
                 {
                     _inputValue = value;
+                    OnValueUpdated?.Invoke(InputValue);
                     Validate(value);
                     if (IsValid)
                         OnSuccessValidation?.Invoke(InputValue);
@@ -160,11 +166,8 @@ namespace SKitLs.Data.InputForms.InputParts
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="propertyInfo"/> or <paramref name="meta"/> is <see langword="null"/>.</exception>
         public InputPartBase(PropertyInfo propertyInfo, InputDataBaseAttribute meta)
         {
-            ArgumentNullException.ThrowIfNull(meta);
-
             PropertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
-            InputCaption = meta.Caption;
-            InputDescription = meta.Description;
+            Meta = meta ?? throw new ArgumentNullException(nameof(meta));
         }
 
         // public abstract InputPartBase BuildSelf(PropertyInfo info, InputDataBaseAttribute meta, object form);
