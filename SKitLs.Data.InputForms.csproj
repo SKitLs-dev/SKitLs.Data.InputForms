@@ -5,15 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
-    <PackageReleaseNotes>(~) Fixed: Master-Slave dependent subscription call
-
-InputPartBase:
-(+) Added: InputDataBaseAttribute Meta proprty
-(~) Fixed: OnValueUpdated raising on value updated</PackageReleaseNotes>
+    <PackageReleaseNotes>(+) Custom PreviewBaseAttribute
+(~) Internal Updates</PackageReleaseNotes>
     <PackageTags>User Input; Data;</PackageTags>
-    <Version>$(AssemblyVersion)</Version>
+    <Version>$(AssemblyVersion)-preview.0</Version>
     <Title>SKitLs.Data.InputForms</Title>
     <Authors>SKitLs, Sargeras02</Authors>
     <Description>SKitLs.Data.InputForms is a .NET/C# library that offers a unified approach to user input handling by enabling developers to create data forms with specified constraints.

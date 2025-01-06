@@ -29,7 +29,7 @@ namespace SKitLs.Data.InputForms.InputParts
         /// <summary>
         /// Gets or sets the input field parent form.
         /// </summary>
-        public InputForm? Parent { get; set; }
+        public InputForm? Parent { get; internal set; }
 
         /// <summary>
         /// Gets the localizator used to resolve localized strings for this input part.
@@ -111,7 +111,7 @@ namespace SKitLs.Data.InputForms.InputParts
         /// Generates a preview of the input in the specified language.
         /// </summary>
         /// <param name="input">The input to be previewed.</param>
-        /// <param name="language">The language code for localization. The form's <see cref="InputForm{T}.Language"/> is used if not specified.</param>
+        /// <param name="language">The language code for localization. The form's <see cref="InputForm.Language"/> is used if not specified.</param>
         /// <returns>The localized error preview string, or <see langword="null"/> if the input is valid.</returns>
         /// <exception cref="NullReferenceException">Thrown when the <see cref="Localizator"/> is null.</exception>
         public virtual string? Preview(object? input, LanguageCode? language = default)

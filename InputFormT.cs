@@ -1,5 +1,6 @@
 ﻿using SKitLs.Data.InputForms.InputParts;
 using SKitLs.Data.InputForms.Notations;
+using SKitLs.Data.InputForms.Notations.Preview;
 using SKitLs.Data.InputForms.Notations.Refs;
 using SKitLs.Utils.Extensions.Lists;
 using SKitLs.Utils.Localizations.Languages;
@@ -116,7 +117,7 @@ namespace SKitLs.Data.InputForms
                 var inputFieldData = mapper.ResolveInputField(property, meta, FormData);
 
                 inputFieldData.InputValue = value is ICloneable clone ? clone.Clone() : value;
-                inputFieldData.InputPreview = ResolveInputPreview(meta);
+                inputFieldData.InputPreview = ResolveInputPreview(property, meta);
                 inputFieldData.ValidationUpdated += OnValidationUpdated;
                 inputFieldData.InputValueBuilder = meta.ValueBuilder;
                 inputFieldData.Parent = this;
@@ -197,7 +198,7 @@ namespace SKitLs.Data.InputForms
         /// </summary>
         /// <param name="inputInfo">The metadata attribute associated with the input field.</param>
         /// <returns>The resolved input preview function.</returns>
-        internal static Func<object?, LocalSet?>? ResolveInputPreview(InputDataBaseAttribute inputInfo)
+        internal static Func<object?, LocalSet?>? ResolveInputPreview(PropertyInfo property, InputDataBaseAttribute inputInfo)
         {
             if (inputInfo.PreviewMethodName is not null)
             {
@@ -207,6 +208,29 @@ namespace SKitLs.Data.InputForms
                     var func = (Func<object?, LocalSet?>?)Delegate.CreateDelegate(typeof(Func<object, LocalSet?>), null, method);
                     return func;
                 }
+            }
+            else
+            {
+                var previewAttrs = property.GetCustomAttributes<PreviewBaseAttribute>(true);
+                return (input) =>
+                {
+                    var error = inputInfo.DefaultPreview(input);
+                    if (error is not null)
+                    {
+                        return error;
+                    }
+                    
+                    foreach (var preview in previewAttrs)
+                    {
+                        preview.PreviewInput(input);
+                        error = inputInfo.DefaultPreview(input);
+                        if (error is not null)
+                        {
+                            return error;
+                        }
+                    }
+                    return null;
+                };
             }
             return inputInfo.DefaultPreview;
         }
