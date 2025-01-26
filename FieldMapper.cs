@@ -53,6 +53,7 @@ namespace SKitLs.Data.InputForms
                 { typeof(BoolDataAttribute), BoolInputPart.BuildSelf },
                 { typeof(TextInputAttribute), StringInputPart.BuildSelf },
                 { typeof(IntInputAttribute), StringInputPart.BuildSelf },
+                { typeof(T2D8InputAttribute), StringInputPart.BuildSelf },
                 { typeof(SelectDataAttribute), SelectInputPart.BuildSelf },
                 { typeof(BrowseDataAttribute), BrowseInputPart.BuildSelf },
             };

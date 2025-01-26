@@ -15,7 +15,7 @@ namespace SKitLs.Data.InputForms.Notations
         /// <summary>
         /// Gets or sets a value indicating whether the input field is necessary.
         /// </summary>
-        public bool IsNecessary { get; set; }
+        public bool Required { get; set; }
 
         /// <summary>
         /// Gets or sets the caption for the input field.
@@ -37,9 +37,9 @@ namespace SKitLs.Data.InputForms.Notations
         /// <summary>
         /// Initializes a new instance of the <see cref="InputDataBaseAttribute"/> class with the default properties for localization.
         /// </summary>
-        public InputDataBaseAttribute(bool isNecessary, string? previewMethodName)
+        public InputDataBaseAttribute(bool required, string? previewMethodName)
         {
-            IsNecessary = isNecessary;
+            Required = required;
             PreviewMethodName = previewMethodName;
             ShouldLocalize = true;
             Caption = "{0}.{1}.{2}.caption";
@@ -76,14 +76,14 @@ namespace SKitLs.Data.InputForms.Notations
         /// </summary>
         /// <param name="caption">The caption for the input field.</param>
         /// <param name="description">The description for the input field.</param>
-        /// <param name="isNecessary">A value indicating whether the input field is necessary.</param>
+        /// <param name="required">A value indicating whether the input field is necessary.</param>
         /// <param name="previewMethodName">The name of the method used to generate a preview of the input value.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="caption"/> or <paramref name="description"/> is <see langword="null"/></exception>
-        public InputDataBaseAttribute(string caption, string description, bool isNecessary, string? previewMethodName)
+        public InputDataBaseAttribute(string caption, string description, bool required, string? previewMethodName)
         {
             Caption = caption ?? throw new ArgumentNullException(nameof(caption));
             Description = description ?? throw new ArgumentNullException(nameof(description));
-            IsNecessary = isNecessary;
+            Required = required;
             PreviewMethodName = previewMethodName;
         }
 

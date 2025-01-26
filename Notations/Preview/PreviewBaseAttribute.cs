@@ -2,12 +2,12 @@
 
 namespace SKitLs.Data.InputForms.Notations.Preview
 {
-    internal abstract class PreviewBaseAttribute : Attribute
+    public abstract class PreviewBaseAttribute : Attribute
     {
         public abstract LocalSet? PreviewInput(object? input);
     }
 
-    internal abstract class PreviewBaseAttribute<T> : PreviewBaseAttribute
+    public abstract class PreviewBaseAttribute<T> : PreviewBaseAttribute
     {
         public override LocalSet? PreviewInput(object? input)
         {

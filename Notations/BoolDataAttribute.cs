@@ -16,17 +16,17 @@ namespace SKitLs.Data.InputForms.Notations
         /// </summary>
         /// <param name="caption">The caption or label for the input field.</param>
         /// <param name="description">A brief description of the input field.</param>
-        /// <param name="isNecessary">Indicates whether the input field is necessary. Defaults to true.</param>
+        /// <param name="required">Indicates whether the input field is necessary. Defaults to true.</param>
         /// <param name="previewMethodName">Optional. The name of the method used to generate a preview of the input value.</param>
-        public BoolDataAttribute(string caption, string description, bool isNecessary = true, string? previewMethodName = null) : base(caption, description, isNecessary, previewMethodName)
+        public BoolDataAttribute(string caption, string description, bool required = true, string? previewMethodName = null) : base(caption, description, required, previewMethodName)
         { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BoolDataAttribute"/> class with the specified properties.
         /// </summary>
-        /// <param name="isNecessary">Indicates whether the input field is necessary. Defaults to true.</param>
+        /// <param name="required">Indicates whether the input field is necessary. Defaults to true.</param>
         /// <param name="previewMethodName">Optional. The name of the method used to generate a preview of the input value. Can be null.</param>
-        public BoolDataAttribute(bool isNecessary = true, string? previewMethodName = null) : base(isNecessary, previewMethodName) { }
+        public BoolDataAttribute(bool required = true, string? previewMethodName = null) : base(required, previewMethodName) { }
 
         /// <inheritdoc/>
         public override LocalSet? DefaultPreview(object? input)

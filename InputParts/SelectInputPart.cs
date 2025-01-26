@@ -57,7 +57,7 @@ namespace SKitLs.Data.InputForms.InputParts
                 throw new InvalidOperationException($"The result of the method is not of type {typeof(List<string>)}");
             }
 
-            if (!SourceAttribute.IsNecessary)
+            if (!SourceAttribute.Required)
                 resolvedOptions.Insert(0, new (Locals.DefaultSelectOption, null!));
 
             Options = resolvedOptions;
@@ -73,8 +73,8 @@ namespace SKitLs.Data.InputForms.InputParts
         {
             if (input is string str)
             {
-                if (SourceAttribute.IsNecessary && string.IsNullOrEmpty(str))
-                    return Locals.FieldIsNecessaryErrorKey;
+                if (SourceAttribute.Required && string.IsNullOrEmpty(str))
+                    return Locals.FieldRequiredErrorKey;
                 if (Options.Find(x => str.Equals(x.Label, StringComparison.CurrentCultureIgnoreCase)) is null)
                     return Locals.ShouldSelectOptionErrorKey;
                 return null;

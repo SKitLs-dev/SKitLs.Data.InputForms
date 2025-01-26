@@ -1,5 +1,5 @@
 {
-  "iforms.FieldIsNecessary": "Field is necessary",
+  "iforms.FieldRequired": "Field is necessary",
   "iforms.ShouldTypeText": "Text should be typed",
   "iforms.ShouldTypeNumber": "Number should be typed",
   "iforms.NumberBetweenErrorKey": "Number must be between {0} and {1}",

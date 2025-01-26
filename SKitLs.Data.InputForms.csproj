@@ -7,10 +7,16 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <AssemblyVersion>1.1.0</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
-    <PackageReleaseNotes>(+) Custom PreviewBaseAttribute
-(~) Internal Updates</PackageReleaseNotes>
+    <PackageReleaseNotes>(!) Fixed: iForms now supports and can properly handle nullable fields
+
+(+) Added: Text-to-Date input attr
+
+(~) Renamed (for DataAttributes): IsNecessary -&gt; Required
+(~) Fixed: PreviewBaseAttribute is now public
+(~) Fixed: preview fail for custom attributes when not required, but input is null/empty
+(~) Refactor: internal preview mechanism</PackageReleaseNotes>
     <PackageTags>User Input; Data;</PackageTags>
-    <Version>$(AssemblyVersion)-preview.0</Version>
+    <Version>$(AssemblyVersion)-rc.0</Version>
     <Title>SKitLs.Data.InputForms</Title>
     <Authors>SKitLs, Sargeras02</Authors>
     <Description>SKitLs.Data.InputForms is a .NET/C# library that offers a unified approach to user input handling by enabling developers to create data forms with specified constraints.
@@ -23,7 +29,7 @@ The library supports converting these forms into various user interfaces through
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <IncludeSymbols>True</IncludeSymbols>
+    <IncludeSymbols>False</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <RepositoryUrl>https://github.com/SKitLs-dev/SKitLs.Data.InputForms</RepositoryUrl>
     <SignAssembly>False</SignAssembly>

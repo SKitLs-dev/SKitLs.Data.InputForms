@@ -185,7 +185,36 @@ namespace SKitLs.Data.InputForms
             {
                 foreach (var part in InputParts)
                 {
-                    part.PropertyInfo.SetValue(FormData, part.GetInputValue());
+                    var propertyType = part.PropertyInfo.PropertyType;
+                    var valueType = part.GetInputValue()?.GetType();
+
+                    // Если propertyType — Nullable<T>, получить базовый тип T
+                    if (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    {
+                        // TODO : Exception
+                        propertyType = Nullable.GetUnderlyingType(propertyType) ?? throw new Exception(); // Извлекаем T из Nullable<T>
+                    }
+
+                    // Проверяем совместимость типов
+                    if (valueType is not null && propertyType.IsAssignableFrom(valueType))
+                    {
+                        part.PropertyInfo.SetValue(FormData, part.GetInputValue());
+                    }
+                    //if (part.PropertyInfo.PropertyType.IsAssignableTo(part.GetInputValue()?.GetType()))
+                    //{
+                    //    part.PropertyInfo.SetValue(FormData, part.GetInputValue());
+                    //}
+                    else if (part.PropertyInfo.PropertyType.IsGenericType &&
+                        part.PropertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) &&
+                        !part.Meta.Required)
+                    {
+                        part.PropertyInfo.SetValue(FormData, null);
+                    }
+                    else
+                    {
+                        // TODO: Exception
+                        throw new Exception();
+                    }
                 }
                 return FormData;
             }
@@ -222,8 +251,7 @@ namespace SKitLs.Data.InputForms
                     
                     foreach (var preview in previewAttrs)
                     {
-                        preview.PreviewInput(input);
-                        error = inputInfo.DefaultPreview(input);
+                        error = preview.PreviewInput(input);
                         if (error is not null)
                         {
                             return error;

@@ -1,5 +1,5 @@
 {
-  "iforms.FieldIsNecessary": "Поле обязательно для ввода",
+  "iforms.FieldRequired": "Поле обязательно для ввода",
   "iforms.ShouldTypeText": "Необходимо ввести текст",
   "iforms.ShouldTypeNumber": "Необходимо ввести число",
   "iforms.NumberBetweenErrorKey": "Введите число от {0} до {1}",

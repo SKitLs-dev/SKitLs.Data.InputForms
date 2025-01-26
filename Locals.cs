@@ -10,14 +10,14 @@
         /// </summary>
         public static string NamespacePrefix { get; set; } = "iforms";
 
-        private static string _fieldIsNecessaryErrorKey = "FieldIsNecessary";
+        private static string _fieldRequiredErrorKey = "FieldRequired";
         /// <summary>
         /// Gets or sets the localization key for the "field is necessary" error message.
         /// </summary>
-        public static string FieldIsNecessaryErrorKey
+        public static string FieldRequiredErrorKey
         {
-            get => NamespacePrefix + "." + _fieldIsNecessaryErrorKey;
-            set => _fieldIsNecessaryErrorKey = value;
+            get => NamespacePrefix + "." + _fieldRequiredErrorKey;
+            set => _fieldRequiredErrorKey = value;
         }
 
         private static string _shouldTypeTextErrorKey = "ShouldTypeText";

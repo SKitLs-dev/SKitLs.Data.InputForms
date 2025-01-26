@@ -22,9 +22,9 @@ namespace SKitLs.Data.InputForms.Notations
         /// <param name="caption">The caption or label for the input field.</param>
         /// <param name="description">A brief description of the input field.</param>
         /// <param name="getOptionsMethodName">The name of the method that provides the options for the input field.</param>
-        /// <param name="isNecessary">Indicates whether the input field is necessary. Defaults to true.</param>
+        /// <param name="required">Indicates whether the input field is necessary. Defaults to true.</param>
         /// <param name="previewMethodName">Optional. The name of the method used to generate a preview of the input value.</param>
-        public SelectDataAttribute(string caption, string description, string getOptionsMethodName, bool isNecessary = true, string? previewMethodName = null) : base(caption, description, isNecessary, previewMethodName)
+        public SelectDataAttribute(string caption, string description, string getOptionsMethodName, bool required = true, string? previewMethodName = null) : base(caption, description, required, previewMethodName)
         {
             GetOptionsMethodName = getOptionsMethodName;
         }
@@ -33,9 +33,9 @@ namespace SKitLs.Data.InputForms.Notations
         /// Initializes a new instance of the <see cref="SelectDataAttribute"/> class with the specified properties.
         /// </summary>
         /// <param name="getOptionsMethodName">The name of the method that provides the options for the input field.</param>
-        /// <param name="isNecessary">Indicates whether the input field is necessary. Defaults to true.</param>
+        /// <param name="required">Indicates whether the input field is necessary. Defaults to true.</param>
         /// <param name="previewMethodName">Optional. The name of the method used to generate a preview of the input value. Can be null.</param>
-        public SelectDataAttribute(string getOptionsMethodName, bool isNecessary = true, string? previewMethodName = null) : base(isNecessary, previewMethodName)
+        public SelectDataAttribute(string getOptionsMethodName, bool required = true, string? previewMethodName = null) : base(required, previewMethodName)
         {
             GetOptionsMethodName = getOptionsMethodName;
         }
@@ -45,9 +45,9 @@ namespace SKitLs.Data.InputForms.Notations
         {
             if (input is string str)
             {
-                if (IsNecessary && string.IsNullOrEmpty(str))
+                if (Required && string.IsNullOrEmpty(str))
                 {
-                    return Locals.FieldIsNecessaryErrorKey;
+                    return Locals.FieldRequiredErrorKey;
                 }
                 return null;
             }

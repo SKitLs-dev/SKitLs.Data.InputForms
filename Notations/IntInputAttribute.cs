@@ -28,9 +28,9 @@ namespace SKitLs.Data.InputForms.Notations
         /// <param name="description">A brief description of the input field.</param>
         /// <param name="min">The minimum allowable value for the input field. Defaults to <see cref="int.MinValue"/>.</param>
         /// <param name="max">The maximum allowable value for the input field. Defaults to <see cref="int.MaxValue"/>.</param>
-        /// <param name="isNecessary">Indicates whether the input field is necessary. Defaults to true.</param>
+        /// <param name="required">Indicates whether the input field is necessary. Defaults to true.</param>
         /// <param name="previewMethodName">Optional. The name of the method used to generate a preview of the input value.</param>
-        public IntInputAttribute(string caption, string description, int min = int.MinValue, int max = int.MaxValue, bool isNecessary = true, string? previewMethodName = null) : base(caption, description, isNecessary, previewMethodName)
+        public IntInputAttribute(string caption, string description, int min = int.MinValue, int max = int.MaxValue, bool required = true, string? previewMethodName = null) : base(caption, description, required, previewMethodName)
         {
             MinValue = min;
             MaxValue = max;
@@ -41,9 +41,9 @@ namespace SKitLs.Data.InputForms.Notations
         /// </summary>
         /// <param name="min">The minimum allowable value for the input field. Defaults to <see cref="int.MinValue"/>.</param>
         /// <param name="max">The maximum allowable value for the input field. Defaults to <see cref="int.MaxValue"/>.</param>
-        /// <param name="isNecessary">Indicates whether the input field is necessary. Defaults to true.</param>
+        /// <param name="required">Indicates whether the input field is necessary. Defaults to true.</param>
         /// <param name="previewMethodName">Optional. The name of the method used to generate a preview of the input value. Can be null.</param>
-        public IntInputAttribute(int min = int.MinValue, int max = int.MaxValue, bool isNecessary = true, string? previewMethodName = null) : base(isNecessary, previewMethodName)
+        public IntInputAttribute(int min = int.MinValue, int max = int.MaxValue, bool required = true, string? previewMethodName = null) : base(required, previewMethodName)
         {
             MinValue = min;
             MaxValue = max;
@@ -56,6 +56,9 @@ namespace SKitLs.Data.InputForms.Notations
             if (error is null)
             {
                 var str = (string)input!;
+                if (string.IsNullOrEmpty(str) && !Required)
+                    return null;
+                
                 if (!int.TryParse(str, out int value))
                     return Locals.ShouldTypeNumberErrorKey;
                 else if (value < MinValue || value > MaxValue)
